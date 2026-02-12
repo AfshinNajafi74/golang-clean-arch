@@ -1,12 +1,15 @@
 package api
 
 import (
+	"fmt"
 	"golang-clean-arch/api/routers"
+	"golang-clean-arch/config"
 
 	"github.com/gin-gonic/gin"
 )
 
 func InitServer() {
+	cfg := config.GetConfig()
 	r := gin.New()
 	r.Use(gin.Logger(), gin.Recovery())
 
@@ -17,7 +20,7 @@ func InitServer() {
 		routers.Health(health)
 	}
 
-	err := r.Run(":5005")
+	err := r.Run(fmt.Sprintf(":%s", cfg.Server.Port))
 	if err != nil {
 		return
 	}
