@@ -3,14 +3,21 @@ package api
 import (
 	"fmt"
 	"golang-clean-arch/api/routers"
+	"golang-clean-arch/api/validations"
 	"golang-clean-arch/config"
 
 	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
+	"github.com/go-playground/validator/v10"
 )
 
 func InitServer() {
 	cfg := config.GetConfig()
 	r := gin.New()
+	val, ok := binding.Validator.Engine().(*validator.Validate)
+	if ok {
+		val.RegisterValidation("mobile", validations.IranianMobileValidator, true)
+	}
 	r.Use(gin.Logger(), gin.Recovery())
 
 	api := r.Group("/api")
