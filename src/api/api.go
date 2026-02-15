@@ -2,6 +2,7 @@ package api
 
 import (
 	"fmt"
+	"golang-clean-arch/api/middlewares"
 	"golang-clean-arch/api/routers"
 	"golang-clean-arch/api/validations"
 	"golang-clean-arch/config"
@@ -18,7 +19,7 @@ func InitServer() {
 	if ok {
 		val.RegisterValidation("mobile", validations.IranianMobileValidator, true)
 	}
-	r.Use(gin.Logger(), gin.Recovery())
+	r.Use(gin.Logger(), gin.Recovery(), middlewares.TestMiddlewares())
 
 	api := r.Group("/api")
 	v1 := api.Group("/v1")
