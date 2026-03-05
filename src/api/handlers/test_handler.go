@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"golang-clean-arch/api/helper"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -25,15 +26,14 @@ func NewTestHandler() *TestHandler {
 }
 
 func (testHandler *TestHandler) Test(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"result": "Test",
-	})
+	//c.JSON(http.StatusOK, gin.H{
+	//	"result": "Test",
+	//})
+	c.JSON(http.StatusOK, helper.GenerateBaseResponse("Test", true, 0))
 }
 
 func (testHandler *TestHandler) Users(context *gin.Context) {
-	context.JSON(http.StatusOK, gin.H{
-		"result": "Users",
-	})
+	context.JSON(http.StatusOK, helper.GenerateBaseResponse("Test", true, 0))
 }
 
 func (testHandler *TestHandler) UserById(context *gin.Context) {
