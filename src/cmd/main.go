@@ -1,7 +1,14 @@
 package main
 
-import "golang-clean-arch/api"
+import (
+	"golang-clean-arch/api"
+	"golang-clean-arch/config"
+	"golang-clean-arch/data/cache"
+)
 
 func main() {
-	api.InitServer()
+	cfg := config.GetConfig()
+	api.InitServer(cfg)
+	defer cache.CloseRedis()
+	cache.InitRedis(cfg)
 }
