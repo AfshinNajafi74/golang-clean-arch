@@ -12,8 +12,8 @@ type Header struct {
 	Browser string
 }
 
-type PersonData struct {
-	FirstName    string `json:"first_name" binding:"required,alpha,min=41,max=10"`
+type personData struct {
+	FirstName    string `json:"first_name" binding:"required,alpha,min=4,max=10"`
 	LastName     string `json:"last_name" binding:"required,alpha,min=6,max=20"`
 	MobileNumber string `json:"mobile_number" binding:"required,mobile,min=11,max=11"`
 }
@@ -36,6 +36,15 @@ func (testHandler *TestHandler) Users(context *gin.Context) {
 	context.JSON(http.StatusOK, helper.GenerateBaseResponse("Test", true, 0))
 }
 
+// @Summary UserById
+// @Description UserById
+// @Tags Test
+// @Accept  json
+// @Produce  json
+// @Param id path int true "user id"
+// @Success 200 {object} helper.BaseHttpResponse "Success"
+// @Failure 400 {object} helper.BaseHttpResponse "Failed"
+// @Router /v1/test/users/{id} [get]
 func (testHandler *TestHandler) UserById(context *gin.Context) {
 	id := context.Param("id")
 
@@ -117,8 +126,19 @@ func (testHandler *TestHandler) UriBinder(context *gin.Context) {
 	})
 }
 
+// BodyBinder godoc
+// @Summary BodyBinder
+// @Description BodyBinder
+// @Tags Test
+// @Accept  json
+// @Produce  json
+// @Param person body personData true "person data"
+// @Success 200 {object} helper.BaseHttpResponse "Success"
+// @Failure 400 {object} helper.BaseHttpResponse "Failed"
+// @Router /v1/test/binder/body [post]
+// Security AuthBearer
 func (testHandler *TestHandler) BodyBinder(context *gin.Context) {
-	p := PersonData{}
+	p := personData{}
 	err := context.ShouldBindJSON(&p)
 	if err != nil {
 		context.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
@@ -135,7 +155,7 @@ func (testHandler *TestHandler) BodyBinder(context *gin.Context) {
 }
 
 func (testHandler *TestHandler) FormBinder(context *gin.Context) {
-	p := PersonData{}
+	p := personData{}
 	context.Bind(&p)
 	context.JSON(http.StatusOK, gin.H{
 		"result":    "FormBinder",

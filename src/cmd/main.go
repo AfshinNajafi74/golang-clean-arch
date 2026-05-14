@@ -6,6 +6,9 @@ import (
 	"golang-clean-arch/data/cache"
 )
 
+// @securityDefinitions.apikey AuthBearer
+// @in header
+// @name Authorization
 func main() {
 	cfg := config.GetConfig()
 	api.InitServer(cfg)

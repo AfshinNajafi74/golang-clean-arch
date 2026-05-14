@@ -20,6 +20,12 @@ type ServerConfig struct {
 	RunMode string `mapstructure:"runMode"`
 }
 
+type LoggerConfig struct {
+	filePath string
+	Encoding string
+	level    string
+}
+
 type PostgresConfig struct {
 	Host     string `mapstructure:"host"`
 	Port     string `mapstructure:"port"`
