@@ -12,6 +12,7 @@ import (
 func main() {
 	cfg := config.GetConfig()
 	api.InitServer(cfg)
+	//logger := logging.NewLogger(cfg)
 	defer cache.CloseRedis()
 	cache.InitRedis(cfg)
 }

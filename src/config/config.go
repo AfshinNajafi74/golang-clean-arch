@@ -13,6 +13,7 @@ type Config struct {
 	Server   ServerConfig   `mapstructure:"server"`
 	Postgres PostgresConfig `mapstructure:"postgres"`
 	Redis    RedisConfig    `mapstructure:"redis"`
+	Logger   LoggerConfig   `mapstructure:"logger"`
 }
 
 type ServerConfig struct {
@@ -21,9 +22,10 @@ type ServerConfig struct {
 }
 
 type LoggerConfig struct {
-	filePath string
+	FilePath string
 	Encoding string
-	level    string
+	Level    string
+	Logger   string
 }
 
 type PostgresConfig struct {

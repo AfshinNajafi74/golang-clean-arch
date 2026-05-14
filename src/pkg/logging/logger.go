@@ -1,5 +1,7 @@
 package logging
 
+import "golang-clean-arch/config"
+
 type Logger interface {
 	Debug(cat Category, sub SubCategory, msg string, extra map[ExtraKey]interface{})
 	Debugf(template string, args ...interface{})
@@ -25,3 +27,7 @@ type Logger interface {
 //	}
 //	panic("logger not supported")
 //}
+
+func NewLogger(cfg *config.Config) Logger {
+	return newZapLogger(cfg)
+}
