@@ -19,15 +19,11 @@ type Logger interface {
 	Fatalf(template string, args ...interface{})
 }
 
-//func newLogger(cfg *config.Config) Logger {
-//	if cfg.Logger.Logger == "zap" {
-//		return newZapLogger(cfg)
-//	} else if cfg.Logger.Logger == "zerolog" {
-//		return newZeroLogger(cfg)
-//	}
-//	panic("logger not supported")
-//}
-
-func NewLogger(cfg *config.Config) Logger {
-	return newZapLogger(cfg)
+func newLogger(cfg *config.Config) Logger {
+	if cfg.Logger.Logger == "zap" {
+		return newZapLogger(cfg)
+	} else if cfg.Logger.Logger == "zerolog" {
+		return newZeroLogger(cfg)
+	}
+	panic("logger not supported")
 }
